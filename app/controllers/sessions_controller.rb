@@ -4,11 +4,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_credientials(session_params.email, session_params.password)
+    email, password = session_params.values
+    @user = User.find_by_credientials(email, password)
 
     if @user
       login(@user)
-      render json: "Welcome, #{@user.name}!"
+      redirect_to user_url(current_user)
+      # render "users/show"
     else
       flash[:error] = "Invalid username/password."
       redirect_to new_session_url
@@ -16,13 +18,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_user
+    current_user.reset_session_token!
+    logout
+    redirect_to new_session_url
   end
 
   private
 
   def session_params
-    params.requre(:user).permit(:email, :password)
+    params.require(:user).permit(:email, :password)
   end
 
 end

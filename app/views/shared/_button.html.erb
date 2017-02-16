@@ -1,0 +1,24 @@
+<% if action == :signup %>
+  <% form_action = new_user_url %>
+  <% form_method = "GET" %>
+  <% form_value = "SIGN UP" %>
+
+<% elsif action == :login %>
+  <% form_action = new_session_url %>
+  <% form_method = "GET" %>
+  <% form_value = "LOGIN" %>
+
+<% elsif action == :logout %>
+  <% form_action = session_url %>
+  <% form_method = "POST" %>
+  <% form_value = "LOGOUT" %>
+<% end %>
+
+
+<form action=" <%= form_action %>" method= "<%= form_method %>">
+  <input type="hidden" name="authenticity_token" value="form_authenticity_token">
+  <% if action == :logout %>
+    <input type="hidden" name="_method" value="DELETE">
+  <% end %>
+  <input type="submit" value=" <%= form_value %>">
+</form>

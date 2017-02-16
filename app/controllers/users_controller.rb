@@ -3,12 +3,20 @@ class UsersController < ApplicationController
     render :new
   end
 
+  def show
+    render :show
+  end
+
+  def self.login
+    super
+  end
+
   def create
     @user = User.new(user_params)
 
     if @user.save
       login(@user)
-      render json: "Welcome, #{@user.name}!"
+      redirect_to user_url(@user)
     else
       flash[:error] = @user.errors.full_messages
       redirect_to new_user_url

@@ -1,0 +1,27 @@
+<% if action == :create_account %>
+  <% form_action = users_url %>
+<% elsif action == :login %>
+  <% form_action = session_url %>
+<% end %>
+
+
+<form action=" <%= form_action %>" method="POST">
+  <input type="hidden" name="authenticity_token" value="form_authenticity_token">
+  <% if action == :create_account %>
+  <label for="user_name">Name: </label>
+    <input id= "user_name" type="text" name="user[name]">
+  <% end %>
+
+<br>
+
+<label for="user_email">Email: </label>
+  <input id= "user_email" type="text" name="user[email]">
+
+<br>
+
+<label for="user_password">Password: </label>
+  <input id= "user_password" type="password" name="user[password]">
+
+<input type="submit" value="Submit">
+
+</form>

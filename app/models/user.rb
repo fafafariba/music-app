@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   def self.find_by_credientials(email, password)
-    user = User.findy_by(email: email)
-    (!user.nil? || user.is_password?(password)) ? user : nil
+    user = User.find_by(email: email)
+    (user.nil? || !user.is_password?(password)) ? nil : user
   end
 
   def self.generate_session_token
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def is_password?(password)
-    BCrypt::Password.new(password) == password
+    BCrypt::Password.new(self.password_digest) == password
   end
 
   def reset_session_token!

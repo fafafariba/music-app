@@ -1,24 +1,5 @@
 <h1>CREATE AN ACCOUNT</h1>
 
-<br>
-
 <%= render 'shared/flash' %>
 
-<form action=" <%= users_url %>" method="POST">
-  <input type="hidden" name="authenticity_token" value="form_authenticity_token">
-<label for="user_name">Name: </label>
-  <input id= "user_name" type="text" name="user[name]">
-
-<br>
-
-<label for="user_email">Email: </label>
-  <input id= "user_email" type="text" name="user[email]">
-
-<br>
-
-<label for="user_password">Password: </label>
-  <input id= "user_password" type="password" name="user[password]">
-
-<input type="submit" value="Submit">
-
-</form>
+<%= render 'shared/form', action: :create_account %>
