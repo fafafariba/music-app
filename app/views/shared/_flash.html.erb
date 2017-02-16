@@ -1,0 +1,6 @@
+<% if flash %>
+  <% flash.each do |error| %>
+    <%= error.flatten.first.capitalize  %>:   <%= error.flatten.last  %>
+  <% end %>
+  <br><br>
+<% end %>
