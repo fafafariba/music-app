@@ -1,0 +1,19 @@
+
+<% if main == :bands %>
+  <% link_name = main %>
+  <% link_url = bands_url %>
+<% elsif main == :band_from_show %>
+  <% link_name = @album.band.name %>
+  <% link_url = band_url(@album.band_id) %>
+<% elsif main == :band_from_new %>
+  <% link_name = Album.find_by(band_id: params[:band_id]).band.name %>
+  <% link_url = band_url(params[:band_id]) %>
+<% elsif main == :album %>
+  <% link_name = @album.name %>
+  <% link_url = band_url(@album) %>
+<% end %>
+
+
+<br>
+<%= link_to "<<back to #{link_name}", link_url %>
+<br>

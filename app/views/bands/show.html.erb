@@ -1,0 +1,4 @@
+<%= render 'shared/back', main: :bands %>
+<h1><%= @band.name %></h1>
+<h3>Albums: </h3>
+<%= render @band, action: :show %>

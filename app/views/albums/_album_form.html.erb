@@ -1,0 +1,49 @@
+<% if action == :create %>
+  <% form_value_band = @bands.find_by(id: @band_id).name %>
+  <% form_value_title = "" %>
+  <% form_value_year = "" %>
+  <% form_value_rt = "" %>
+  <% form_action = albums_url %>
+<% elsif action == :update %>
+  <% form_value_band = @album.band.name %>
+  <% form_value_ = @album.title %>
+  <% form_value_name = @album.year %>
+  <% form_value_rt = @album.recording_type %>
+  <% form_action = album_url(@album) %>
+<% end %>
+
+<%= render 'shared/flash' %>
+
+  <form action=" <%= form_action %>" method="POST">
+    <%= render 'shared/auth' %>
+    <% if action == :update %>
+      <input type="hidden" name="_method" value="PATCH">
+    <% end %>
+
+    <label for="album_band_id">Band: </label>
+    <select id="album_band_id" name="album[band_id]">
+      <option></option>
+      <% @bands.each do |band| %>
+        <option
+          <%= band.name == form_value_band ? "selected" : "" %>
+          value="<%= band.id %>" ><%= band.name %>
+        </option>
+      <% end %>
+    </select>
+
+    <label for="album_title">Title: </label>
+    <input id ="album_title" type="text" name="album[title]" value="<%= form_value_title %>">
+    <label for="album_year">Year: </label>
+    <input id ="album_year" type="text" name="album[year]" value="<%= form_value_year %>">
+    <label for="album_rt">Recording Type: </label>
+    <input id="album_rt" type="radio" name="album[recording_type]" value="studio">
+    <label for="album_rt">Studio </label>
+    <input id="album_rt" type="radio" name="album[recording_type]" value="live">
+    <label for="album_rt">Live </label>
+
+
+
+
+  <%= render 'shared/submit' %>
+
+  </form>

@@ -1,0 +1,21 @@
+<% if action == :create %>
+  <% form_value = "" %>
+  <% form_action = bands_url %>
+<% elsif action == :update %>
+  <% form_value = @band.name %>
+  <% form_action = band_url %>
+<% end %>
+
+<%= render 'shared/flash' %>
+
+  <form action=" <%= form_action %>" method="POST">
+    <%= render 'shared/auth' %>
+    <% if action == :update %>
+      <input type="hidden" name="_method" value="PATCH">
+    <% end %>
+    <label for="band_name">Band Name: </label>
+    <input id ="band_name" type="text" name="band[name]" value="<%= form_value %>">
+
+  <%= render 'shared/submit' %>
+
+  </form>

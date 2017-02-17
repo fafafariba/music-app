@@ -16,7 +16,7 @@
 
 
 <form action=" <%= form_action %>" method= "<%= form_method %>">
-  <input type="hidden" name="authenticity_token" value="form_authenticity_token">
+  <%= render 'shared/auth' %>
   <% if action == :logout %>
     <input type="hidden" name="_method" value="DELETE">
   <% end %>

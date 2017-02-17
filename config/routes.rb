@@ -3,6 +3,20 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :new, :show]
 
   resource :session, only: [:create, :new, :destroy]
+
+  resources :bands do #nesting can only happon on single band
+    resources :albums, only: [:new]
+  end
+
+  resources :albums, only: [:create, :destory, :edit, :show, :update, :destory] do
+    resources :tracks, only: [:new]
+  end
+
+  resources :tracks, only: [:create, :destory, :edit, :show, :update, :destory]
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

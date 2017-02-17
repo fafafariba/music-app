@@ -1,0 +1,12 @@
+<%= render 'shared/back', main: :band_from_show %>
+<h1> <%=@album.band.name %> </h1>
+
+<h3> Title: <%= @album.title %> </h3>
+<h3> Years: <%= @album.year %> </h3>
+<h3> Recording Type: <%= @album.recording_type.capitalize %> </h3>
+<h3> Tracks:</h3>
+  <ol>
+    <% @album.tracks.each do |track| %>
+      <li><%= track.title %> (<%=track.track_type%>)</li>
+    <% end %>
+  </ol>
